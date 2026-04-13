@@ -24,7 +24,8 @@ targets:
     flow: sim
     flow_options:
       tool: verilator
-    fileset_append:
+      
+    filesets_append:
       - tb
     toplevel: up_down_counter_tb
 

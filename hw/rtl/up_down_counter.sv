@@ -14,16 +14,14 @@ module up_down_counter (
   always_ff @(posedge clk or negedge rst_n) begin
     if (~rst_n) begin
       count_val <= 8'b0;
-    end else if (load_en) begin
-      count_val <= load_data;
-    end else if (load_en) begin
-      if (count_dir) begin
+    end else if (en) begin
+      if (load_en) begin
+        count_val <= load_data;
+      end else if (count_dir) begin
         count_val <= count_val + 8'd1;
       end else begin
         count_val <= count_val - 8'd1;
       end
     end
   end
-
 endmodule
-

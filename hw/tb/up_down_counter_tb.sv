@@ -1,6 +1,6 @@
 `timescale 1ns / 1ps
 
-module updownCounter_tb;
+module up_down_counter_tb;
   logic       clk;
   logic       rst_n;
   logic       en;
