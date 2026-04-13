@@ -1,0 +1,46 @@
+CAPI=2:
+name: workshop:counter:updown:0.1.0
+description: Beginner workshop 8-bit up/down counter design and testbench.
+
+filesets:
+  rtl:
+    files:
+      - hw/rtl/updownCounter.sv: {file_type: systemVerilogSource}
+
+  tb:
+    files:
+      - hw/tb/updownCounter_tb.sv: {file_type: systemVerilogSource}
+
+targets:
+  default:
+    description: Build the updownCounter RTL.
+    filesets:
+      - rtl
+    toplevel: updownCounter
+
+  tb:
+    description: Build the workshop testbench with the DUT.
+    filesets:
+      - rtl
+      - tb
+    toplevel: updownCounter_tb
+
+  sim_verilator:
+    description: Simulation target using Verilator.
+    flow: sim
+    flow_options:
+      tool: verilator
+    filesets:
+      - rtl
+      - tb
+    toplevel: updownCounter_tb
+
+  synth_yosys:
+    description: Synthesis target using Yosys.
+    flow: synth
+    flow_options:
+      tool: yosys
+    filesets:
+      - rtl
+    toplevel: updownCounter
+
