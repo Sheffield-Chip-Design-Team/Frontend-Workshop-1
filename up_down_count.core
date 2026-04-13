@@ -1,0 +1,39 @@
+CAPI=2:
+name: sharc:example_ip:up_down_counter:1.0.0
+description: Beginner workshop 8-bit up/down counter design and testbench.
+
+filesets:
+  rtl:
+    files:
+      - hw/rtl/up_down_counter.sv: {file_type: systemVerilogSource}
+
+  tb:
+    files:
+      - hw/tb/up_down_counter_tb.sv: {file_type: systemVerilogSource}
+
+targets:
+  default: &sim
+    description: Up-down counter RTL.
+    filesets:
+      - rtl
+    toplevel: up_down_counter
+
+  tb_top:
+    <<: *sim
+    description: Testbench Simulation target using Verilator.
+    flow: sim
+    flow_options:
+      tool: verilator
+    fileset_append:
+      - tb
+    toplevel: up_down_counter_tb
+
+  synth_top:
+    description: Synthesis target using Yosys.
+    flow: synth
+    flow_options:
+      tool: yosys
+    filesets:
+      - rtl
+    toplevel: up_down_counter
+

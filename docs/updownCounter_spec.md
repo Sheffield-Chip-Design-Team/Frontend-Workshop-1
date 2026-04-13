@@ -1,7 +1,7 @@
-# updownCounter Specification (Beginner Friendly)
+# Up-Down Counter Docs
 
 ## 1. What this block does
-`updownCounter` is an 8-bit binary counter.
+`up_down_counter` is an 8-bit bidirectional binary counter.
 
 Think of it like a number register that can:
 - reset to zero,
@@ -13,15 +13,16 @@ Think of it like a number register that can:
 The output value is `Q[7:0]`.
 
 ## 2. Module interface
+
 ```systemverilog
-module updownCounter (
-    input  logic       Clock,
-    input  logic       Reset,
-    input  logic       Enable,
-    input  logic       Load,
-    input  logic       Up1Dn0,
-    input  logic [7:0] Data,
-    output logic [7:0] Q
+module up_down_counter (
+  input  logic        clk,
+  input  logic        rst_n,
+  input  logic        en,
+  input  logic        load_en,
+  input  logic        count_dir,
+  input  logic [7:0]  load_data,
+  output logic [7:0]  count_val
 );
 ```
 
