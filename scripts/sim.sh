@@ -1,6 +1,16 @@
 #!/usr/bin/env bash
-coral config up_down_counter -t cocotb_top
-sleep 1
-coral sim -c /Users/macbook/chip_dev/workshop-1-dev/workspace/build/sharc_example_ip_up_down_counter_1.0.0/cocotb_top/sharc_example_ip_up_down_counter_1.0.0.eda.yml --waves --exe verilator --verbose -o ./sim
+set -euo pipefail
 
-# coral sim --dut up_down_counter --waves --exe verilator --verbose -o ./sim
+TARGET="${TARGET:-cocotb_top}"
+CORE_ID="sharc_example_ip_up_down_counter_1.0.0"
+
+# Relative path from this script to workspace/build
+REL_BUILD_ROOT="${REL_BUILD_ROOT:-../../../build}"
+
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+BUILD_ROOT="$(cd "$SCRIPT_DIR/$REL_BUILD_ROOT" && pwd)"
+CFG_PATH="$BUILD_ROOT/$CORE_ID/$TARGET/$CORE_ID.eda.yml"
+
+coral config up_down_counter -t "$TARGET"
+sleep 1
+coral sim -c "$CFG_PATH" --waves --exe verilator --verbose -o ./sim
