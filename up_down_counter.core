@@ -11,12 +11,16 @@ filesets:
     files:
       - hw/tb/up_down_counter_tb.sv: {file_type: systemVerilogSource}
 
+  cocotb:
+    files:
+      - hw/tb/up_down_counter_wtb.v:   {file_type: verilogSource}
+      - hw/tb/test_up_down_counter.py: {file_type: cocotbSource}
+
 targets:
   default: &sim
     description: Up-down counter RTL.
     filesets:
       - rtl
-    toplevel: up_down_counter
 
   tb_top:
     <<: *sim
@@ -28,6 +32,16 @@ targets:
     filesets_append:
       - tb
     toplevel: up_down_counter_tb
+
+  cocotb_top:
+    <<: *sim
+    description: Testbench Simulation target using Verilator.
+    flow: sim
+    flow_options:
+      tool: verilator
+    filesets_append:
+      - cocotb
+    toplevel: up_down_counter_wtb
 
   synth_top:
     description: Synthesis target using Yosys.
