@@ -25,7 +25,7 @@ module up_down_counter_tb;
 
   initial begin
     $display("Starting Tests...");
-    $dumpfile("updownCounter_tb.vcd");
+    $dumpfile("up_down_counter_sv.vcd");
     $dumpvars(0, up_down_counter_tb);
 
     // Initial values
