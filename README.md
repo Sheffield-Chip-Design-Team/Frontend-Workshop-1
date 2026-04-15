@@ -1,30 +1,22 @@
-# Hardware Design Workshop
+# Frontend Hardware Design Skills - Part 1 
 
-This repository contains materials for a simple digital design workshop.
+This repository contains materials for a simple frontend digital design workshop.
 
-The first design exercise is an 8-bit up/down binary counter written in SystemVerilog.
+The exercise are centered arond a simple synchronous design (an 8-bit up/down binary counter) that has been written in SystemVerilog for this workshop..
 
-## Who this is for
-- Complete beginners in hardware design
-- Students learning RTL, simulation, and waveform-based debugging
+## Prerequisites
+- Tool and environment Setup as per [workshop venv](https://github.com/Sheffield-Chip-Design-Team/feworkshop1-venv)
+- Understanding of Basic Digital Design Concepts and HDLs
 
 ## Workshop learning goals
-- Understand synchronous design around a clock edge
-- Learn reset, enable, load, and direction control behavior
-- Understand how a simple simulation testbench validates RTL behavior
+- Understand the SHaRC Project Flow
+- Run through generic synthesis, learning to understand what RTL will generate
+- Understand the point of functional verification
+- Understand the differernt Testing Tools available for different scenarios
 - Connect RTL behavior with waveform observations
 
-## Quick file map
-- RTL design: `hw/rtl/updownCounter.sv`
-- Testbench: `hw/tb/updownCounter_tb.sv`
-- Counter spec (beginner version): `docs/updownCounter_spec.md`
-- Test documentation: `docs/updownCounter_test_plan.md`
-
-## Recommended workshop flow
-1. Read the counter specification in `docs/updownCounter_spec.md`.
-2. Open and review `hw/rtl/updownCounter.sv`.
-3. Read `docs/updownCounter_test_plan.md`.
-4. Run the test flow and inspect waveforms.
-5. Modify behavior (for example width or reset style) and re-test.
-
-
+## Exercises
+1. Synthesis!              - scripts/synth.sh
+2. Interactive Demo!       - [Digital JS](https://digitaljs.tilk.eu/)
+3. Directed Verification!  - srcipts/verilator.sh  , scripts/sim.sh
+4. Extensions!             - extending the design.
