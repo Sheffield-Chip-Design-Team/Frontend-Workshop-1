@@ -1,11 +1,24 @@
 #!/usr/bin/env bash
+set -euo pipefail
+
+# Must be run from a directory named exactly "workspace" (workspace root)
+if [[ "$(basename -- "$PWD")" != "workspace" ]]; then
+	echo "Error: run this script from the 'workspace' directory (not a subdirectory)." >&2
+	exit 1
+fi
+
 SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
 
 BUILD_DIR="$SCRIPT_DIR/../../../synth"
 mkdir -p "$BUILD_DIR"
 
-RTL_FILE="hw/rtl/up_down_counter.sv"
+RTL_FILE="$SCRIPT_DIR/../hw/rtl/up_down_counter.sv"
 DUT_TOP="up_down_counter"
+
+if [[ ! -f "$RTL_FILE" ]]; then
+	echo "Error: RTL file not found at: $RTL_FILE" >&2
+	exit 1
+fi
 
 sv2v "$RTL_FILE" > "$BUILD_DIR/up_down_counter.v"
 

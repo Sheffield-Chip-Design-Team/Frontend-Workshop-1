@@ -16,9 +16,16 @@ OUTPUT_DIR="$SCRIPT_DIR/../../sim"
 # Relative path from this script to workspace/build
 REL_BUILD_ROOT="${REL_BUILD_ROOT:-../../../build}"
 
-BUILD_ROOT="$(cd "$SCRIPT_DIR/$REL_BUILD_ROOT" && pwd)"
+BUILD_ROOT="$SCRIPT_DIR/$REL_BUILD_ROOT"
 CFG_PATH="$BUILD_ROOT/$CORE_ID/$TARGET/$CORE_ID.eda.yml"
 
 coral config up_down_counter -t "$TARGET"
 sleep 1
+
+if [[ ! -f "$CFG_PATH" ]]; then
+  echo "Error: expected config not found at: $CFG_PATH" >&2
+  echo "Hint: check core/target names and whether 'coral config' generated build artifacts." >&2
+  exit 1
+fi
+
 coral sim -c "$CFG_PATH" --waves --exe verilator --verbose -o ./sim
